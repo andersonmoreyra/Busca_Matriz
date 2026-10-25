@@ -1,0 +1,47 @@
+{% extends 'core_web/base.html' %}
+
+{% block header_title %}Nova Solicitação de Manutenção{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl bg-white rounded-lg shadow overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-800">Preencha os dados do problema</h3>
+    </div>
+
+    <div class="p-6">
+        <form method="POST" action="{% url 'nova_solicitacao' %}">
+            {% csrf_token %}
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold mb-2">Equipamento / Ativo</label>
+                <select name="ativo" required class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Selecione o equipamento com problema...</option>
+                    {% for ativo in ativos %}
+                        <option value="{{ ativo.id }}">{{ ativo.codigo_patrimonio }} - {{ ativo.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold mb-2">Urgência</label>
+                <select name="urgencia" required class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="baixa">Baixa (Pode aguardar planejamento)</option>
+                    <option value="media" selected>Média (Manutenção no próximo turno)</option>
+                    <option value="alta">Alta (Impacta a produção parcial)</option>
+                    <option value="emergencia">Emergência (Máquina parada / Risco eminente)</option>
+                </select>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-semibold mb-2">Descrição da Falha / Sintoma</label>
+                <textarea name="descricao" rows="4" required placeholder="Descreva com detalhes o que está acontecendo..." class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+
+            <div class="flex justify-end">
+                <a href="{% url 'home' %}" class="bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-gray-300 transition mr-2">Cancelar</a>
+                <button type="submit" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition">Enviar Solicitação</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

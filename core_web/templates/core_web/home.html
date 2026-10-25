@@ -1,0 +1,37 @@
+{% extends 'core_web/base.html' %}
+
+{% block header_title %}Painel de Operações{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <!-- Card 1 -->
+    <div class="bg-white rounded-lg shadow p-6 border-t-4 border-blue-500">
+        <h3 class="text-gray-500 text-sm font-semibold mb-1">Total de Ativos</h3>
+        <p class="text-3xl font-bold text-gray-800">{{ total_ativos }}</p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="bg-white rounded-lg shadow p-6 border-t-4 border-yellow-500">
+        <h3 class="text-gray-500 text-sm font-semibold mb-1">Solicitações Pendentes</h3>
+        <p class="text-3xl font-bold text-gray-800">{{ solicitacoes_pendentes }}</p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="bg-white rounded-lg shadow p-6 border-t-4 border-red-500">
+        <h3 class="text-gray-500 text-sm font-semibold mb-1">OS Abertas / Em Andamento</h3>
+        <p class="text-3xl font-bold text-gray-800">{{ os_abertas }}</p>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-800">Ações Rápidas</h3>
+    </div>
+    <div class="p-6">
+        <p class="text-gray-600 mb-4">Bem-vindo ao Portal Web do CMMS. Utilize o menu ao lado para navegar ou acesse a área administrativa completa.</p>
+        <a href="{% url 'nova_solicitacao' %}" class="inline-block bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition">
+            Abrir Chamado / Solicitação
+        </a>
+    </div>
+</div>
+{% endblock %}
